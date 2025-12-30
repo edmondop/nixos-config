@@ -5,6 +5,7 @@
 { config, pkgs, ... }:
 
 {
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -91,12 +92,16 @@
 	  pull.rebase = true;
 	 };
   };
+  programs.zsh.enable = true;
+  programs.zsh.enableCompletion = true;
+  programs.zsh.promptInit = "";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.edmondop = {
     isNormalUser = true;
     description = "Edmondo Porcu";
     extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.zsh;
     packages = with pkgs; [
        
        
@@ -118,6 +123,7 @@
      fzf
      jq
      git
+     gh
      ghostty
      google-chrome
      lm_sensors
@@ -130,6 +136,8 @@
      unzip zip
      wl-clipboard
   ];
+  
+  programs.nix-ld.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
