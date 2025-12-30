@@ -56,6 +56,13 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
+  # GNOME settings
+  programs.dconf.enable = true;
+  environment.etc."dconf/db/local.d/01-button-layout".text = ''
+    [org/gnome/desktop/wm/preferences]
+    button-layout='appmenu:minimize,maximize,close'
+  '';
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
