@@ -9,6 +9,8 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      # Package modules
+      ../../modules/packages/cli-tools.nix
     ];
 
   # Bootloader.
@@ -112,29 +114,17 @@
   # Install firefox.
   programs.firefox.enable = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  # System packages (CLI tools are in modules/packages/cli-tools.nix)
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-     curl wget
-     bat eza
-     file which
-     fzf
-     jq
-     git
-     gh
-     ghostty
-     google-chrome
-     lm_sensors
-     lsof
-     tree
-     btop
-     gnupg
-     pciutils
-     ripgrep fd
-     unzip zip
-     wl-clipboard
+    # JSON/YAML tools
+    jq              # JSON processor
+
+    # Development tools (will move to dev-tools module later)
+    git             # Version control
+    gh              # GitHub CLI
+
+    # Desktop applications (will move to desktop module later)
+    google-chrome   # Web browser
   ];
   
   programs.nix-ld.enable = true;
