@@ -7,7 +7,6 @@
     mise
     rustup
     rbenv
-    ruby-build
     tfenv
   ];
 }
