@@ -17,5 +17,6 @@
     sqlite
     tmux
     lf
+    chezmoi
   ];
 }

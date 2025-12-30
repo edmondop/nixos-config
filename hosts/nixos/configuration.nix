@@ -14,13 +14,14 @@
       ../../modules/packages/dev-tools.nix
       ../../modules/packages/languages.nix
       ../../modules/packages/version-managers.nix
+      ../../modules/packages/infrastructure.nix
     ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "framework-13-nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -118,7 +119,9 @@
   programs.firefox.enable = true;
 
   environment.systemPackages = with pkgs; [
+    gcc
     google-chrome
+    gnumake
   ];
   
   programs.nix-ld.enable = true;
