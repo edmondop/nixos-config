@@ -121,7 +121,7 @@
   environment.systemPackages = with pkgs; [
     gcc
     google-chrome
-    make
+    gnumake
   ];
   
   programs.nix-ld.enable = true;
