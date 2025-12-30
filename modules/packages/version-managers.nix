@@ -7,5 +7,6 @@
     mise
     rustup
     rbenv
+    tenv
   ];
 }
