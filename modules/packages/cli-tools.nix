@@ -28,5 +28,8 @@
     neofetch
     curl
     wget
+    oh-my-zsh
+    zinit
+    foliate
   ];
 }
