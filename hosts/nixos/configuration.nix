@@ -11,6 +11,7 @@
       ./hardware-configuration.nix
       # Package modules
       ../../modules/packages/cli-tools.nix
+      ../../modules/packages/dev-tools.nix
     ];
 
   # Bootloader.
@@ -114,17 +115,8 @@
   # Install firefox.
   programs.firefox.enable = true;
 
-  # System packages (CLI tools are in modules/packages/cli-tools.nix)
   environment.systemPackages = with pkgs; [
-    # JSON/YAML tools
-    jq              # JSON processor
-
-    # Development tools (will move to dev-tools module later)
-    git             # Version control
-    gh              # GitHub CLI
-
-    # Desktop applications (will move to desktop module later)
-    google-chrome   # Web browser
+    google-chrome
   ];
   
   programs.nix-ld.enable = true;
