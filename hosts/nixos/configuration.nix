@@ -119,7 +119,9 @@
   programs.firefox.enable = true;
 
   environment.systemPackages = with pkgs; [
+    gcc
     google-chrome
+    make
   ];
   
   programs.nix-ld.enable = true;
