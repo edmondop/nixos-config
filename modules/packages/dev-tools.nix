@@ -9,7 +9,7 @@
     gh
     lazydocker
     docker-compose
-    taskwarrior
+    taskwarrior2
     jq
     yq-go
     imagemagick
