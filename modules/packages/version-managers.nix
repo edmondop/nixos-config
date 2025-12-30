@@ -7,6 +7,5 @@
     mise
     rustup
     rbenv
-    tfenv
   ];
 }
