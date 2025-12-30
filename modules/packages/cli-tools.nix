@@ -31,5 +31,6 @@
     oh-my-zsh
     zinit
     foliate
+    direnv
   ];
 }
