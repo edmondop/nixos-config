@@ -13,6 +13,7 @@
       ../../modules/packages/cli-tools.nix
       ../../modules/packages/dev-tools.nix
       ../../modules/packages/languages.nix
+      ../../modules/packages/version-managers.nix
     ];
 
   # Bootloader.
