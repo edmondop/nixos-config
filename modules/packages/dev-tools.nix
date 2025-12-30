@@ -4,7 +4,7 @@
   environment.systemPackages = with pkgs; [
     neovim
     git
-    git-delta
+    delta
     lazygit
     gh
     lazydocker
