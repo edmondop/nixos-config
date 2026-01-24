@@ -1,8 +1,8 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+# and in the NixOS manual (accessible by running 'nixos-help').
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -15,11 +15,19 @@
       ../../modules/packages/languages.nix
       ../../modules/packages/version-managers.nix
       ../../modules/packages/infrastructure.nix
+      # Desktop theming
+      ../../modules/desktop/gnome-theming.nix
     ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  # Kernel parameters for Framework laptop sleep/suspend fixes
+  boot.kernelParams = [
+    "mem_sleep_default=s2idle"  # Force s2idle instead of deep sleep
+    "usbcore.autosuspend=-1"    # Disable USB autosuspend
+  ];
 
   networking.hostName = "framework-13-nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -53,8 +61,11 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
+
+  # Enable udev rules for system tray icons (required for AppIndicator)
+  services.udev.packages = with pkgs; [ gnome-settings-daemon ];
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -73,6 +84,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    wireplumber.enable = true;  # Enable wireplumber for camera support
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
 
@@ -84,6 +96,10 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
   nixpkgs.config.allowUnfree = true;
+
+  # Enable dconf for declarative GNOME extension configuration
+  programs.dconf.enable = true;
+
   programs.neovim = {
       enable = true;
       defaultEditor = true;
@@ -102,15 +118,62 @@
   programs.zsh.enableCompletion = true;
   programs.zsh.promptInit = "";
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # GNOME Extensions Configuration (system-level)
+  programs.dconf.profiles.user.databases = [
+    {
+      lockAll = true;  # Force system settings, prevent user overrides
+      settings = {
+        "org/gnome/shell" = {
+          disable-user-extensions = false;
+
+          enabled-extensions = [
+            pkgs.gnomeExtensions.user-themes.extensionUuid
+            pkgs.gnomeExtensions.blur-my-shell.extensionUuid
+            pkgs.gnomeExtensions.appindicator.extensionUuid
+            pkgs.gnomeExtensions.just-perfection.extensionUuid
+            pkgs.gnomeExtensions.vitals.extensionUuid
+            pkgs.gnomeExtensions.net-speed-simplified.extensionUuid
+            pkgs.gnomeExtensions.openmeteoweather.extensionUuid
+            pkgs.gnomeExtensions.spotify-tray.extensionUuid
+            pkgs.gnomeExtensions.caffeine.extensionUuid
+          ];
+        };
+
+        # Just Perfection - bigger panel with more spacing
+        "org/gnome/shell/extensions/just-perfection" = {
+          panel-size = lib.gvariant.mkInt32 42;
+          panel-button-padding-size = lib.gvariant.mkInt32 14;
+          panel-indicator-padding-size = lib.gvariant.mkInt32 10;
+          activities-button = true;
+          app-menu = false;
+        };
+
+        # Vitals - system monitoring (left side for better spacing)
+        "org/gnome/shell/extensions/vitals" = {
+          hot-sensors = ["_processor_usage_" "_memory_usage_" "_temperature_processor_" "__network-rx_max__"];
+          position-in-panel = lib.gvariant.mkInt32 0;  # 0=left (before clock), 2=right
+          icon-style = lib.gvariant.mkInt32 1;
+          menu-centered = false;
+        };
+
+        # Net Speed - show network speed
+        "org/gnome/shell/extensions/netspeedsimplified" = {
+          mode = lib.gvariant.mkInt32 3;
+          isvertical = false;
+        };
+      };
+    }
+  ];
+
+  # Define a user account. Don't forget to set a password with 'passwd'.
   users.users.edmondop = {
     isNormalUser = true;
     description = "Edmondo Porcu";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "video" ];  # video for webcam access
     shell = pkgs.zsh;
     packages = with pkgs; [
-       
-       
+
+
     #  thunderbird
     ];
   };
@@ -123,7 +186,7 @@
     google-chrome
     gnumake
   ];
-  
+
   programs.nix-ld.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -145,9 +208,18 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
+  # TPM (Tmux Plugin Manager) auto-installation
+  system.userActivationScripts.tpm = ''
+    TPM_DIR="$HOME/.tmux/plugins/tpm"
+    if [ ! -d "$TPM_DIR" ]; then
+      mkdir -p "$(dirname "$TPM_DIR")"
+      ${pkgs.git}/bin/git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
+    fi
+  '';
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # on your system were taken. It's perfectly fine and recommended to leave
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
