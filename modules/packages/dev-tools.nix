@@ -7,6 +7,8 @@
     delta
     lazygit
     gh
+    gemini-cli
+    git-filter-repo
     git-lfs
     lazydocker
     docker-compose
