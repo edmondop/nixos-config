@@ -7,6 +7,7 @@
     delta
     lazygit
     gh
+    git-lfs
     lazydocker
     docker-compose
     taskwarrior2
