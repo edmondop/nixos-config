@@ -16,6 +16,7 @@
     jq
     yq-go
     imagemagick
+    opencode
     protobuf
     sqlite
     tmux
