@@ -32,5 +32,6 @@
     zinit
     foliate
     direnv
+    caffeine-ng
   ];
 }
