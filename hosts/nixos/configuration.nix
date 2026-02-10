@@ -169,7 +169,7 @@
   users.users.edmondop = {
     isNormalUser = true;
     description = "Edmondo Porcu";
-    extraGroups = [ "networkmanager" "wheel" "video" ];  # video for webcam access
+    extraGroups = [ "networkmanager" "wheel" "video" "docker" ];  # video for webcam, docker for containers
     shell = pkgs.zsh;
     packages = with pkgs; [
 

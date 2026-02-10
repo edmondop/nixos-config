@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 
 {
+  # Enable Docker
+  virtualisation.docker.enable = true;
+
   environment.systemPackages = with pkgs; [
     awscli2
     kubectl
@@ -11,5 +14,6 @@
     packer
     dbt
     w3m
+    docker-compose
   ];
 }

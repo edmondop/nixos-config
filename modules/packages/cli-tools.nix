@@ -33,5 +33,6 @@
     foliate
     direnv
     caffeine-ng
+    act
   ];
 }
