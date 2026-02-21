@@ -43,6 +43,7 @@
       docker
       git
       go
+      curl
     ];
   };
 
