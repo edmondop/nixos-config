@@ -17,6 +17,8 @@
       ../../modules/packages/infrastructure.nix
       # Desktop theming
       ../../modules/desktop/gnome-theming.nix
+      # System services
+      ../../modules/system/github-runner.nix
     ];
 
   # Bootloader.
@@ -28,6 +30,7 @@
     "mem_sleep_default=s2idle"  # Force s2idle instead of deep sleep
     "usbcore.autosuspend=-1"    # Disable USB autosuspend
   ];
+  boot.kernelModules = [ "iptable_nat" "iptable_filter" ];
 
   networking.hostName = "framework-13-nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -75,6 +78,9 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+
+  # Fingerprint reader support (Framework laptop)
+  services.fprintd.enable = true;
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;

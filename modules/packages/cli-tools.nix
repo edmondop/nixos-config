@@ -34,5 +34,6 @@
     direnv
     caffeine-ng
     act
+    parted
   ];
 }
