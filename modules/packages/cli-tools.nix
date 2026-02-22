@@ -33,5 +33,7 @@
     foliate
     direnv
     caffeine-ng
+    act
+    parted
   ];
 }
