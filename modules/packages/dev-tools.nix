@@ -7,6 +7,7 @@
     delta
     lazygit
     gh
+    turbo
     gemini-cli
     git-filter-repo
     git-lfs
