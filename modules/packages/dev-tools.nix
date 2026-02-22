@@ -4,6 +4,7 @@
   environment.systemPackages = with pkgs; [
     neovim
     git
+    jujutsu
     delta
     lazygit
     gh
