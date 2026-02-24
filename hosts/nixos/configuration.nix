@@ -17,6 +17,7 @@
       ../../modules/packages/infrastructure.nix
       # Desktop theming
       ../../modules/desktop/gnome-theming.nix
+      ../../modules/desktop/hyprland.nix
       # System services
       ../../modules/system/github-runner.nix
     ];
