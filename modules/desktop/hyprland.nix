@@ -6,16 +6,22 @@
     xwayland.enable = true;
   };
 
-  # XDG portal for screen sharing, file picker, etc.
+  # Enable WebRTC PipeWire camera support for browsers (Chrome/Chromium)
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
+
+  # XDG portal for screen sharing, file picker, camera, etc.
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+    extraPortals = [ pkgs.xdg-desktop-portal-hyprland pkgs.xdg-desktop-portal-gtk ];
+    configPackages = [ pkgs.hyprland ];
   };
 
   environment.systemPackages = with pkgs; [
     # Bar & launcher
     waybar
-    rofi-wayland
+    rofi
 
     # Wallpaper
     hyprpaper
