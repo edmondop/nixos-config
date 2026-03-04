@@ -3,9 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    jj-starship.url = "github:dmmulroy/jj-starship";
   };
 
-  outputs = { self, nixpkgs }:
+  outputs = { self, nixpkgs, jj-starship }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -15,6 +16,10 @@
       inherit system;
       modules = [
         ./hosts/nixos/configuration.nix
+        {
+          nixpkgs.overlays = [ jj-starship.overlays.default ];
+          environment.systemPackages = [ pkgs.jj-starship ];
+        }
       ];
     };
 
@@ -45,4 +50,3 @@
     });
   };
 }
-
