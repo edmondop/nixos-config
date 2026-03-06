@@ -18,6 +18,7 @@
     gnomeExtensions.openmeteoweather
     gnomeExtensions.spotify-tray
     gnomeExtensions.caffeine  # Prevent sleep/screen lock
+    gnomeExtensions.arcmenu   # Application launcher menu
 
     # Tools
     dconf-editor

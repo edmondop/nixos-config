@@ -143,6 +143,7 @@
             pkgs.gnomeExtensions.openmeteoweather.extensionUuid
             pkgs.gnomeExtensions.spotify-tray.extensionUuid
             pkgs.gnomeExtensions.caffeine.extensionUuid
+            pkgs.gnomeExtensions.arcmenu.extensionUuid
           ];
         };
 
@@ -153,6 +154,7 @@
           panel-indicator-padding-size = lib.gvariant.mkInt32 10;
           activities-button = true;
           app-menu = false;
+          power-icon = true;
         };
 
         # Vitals - system monitoring (left side for better spacing)
