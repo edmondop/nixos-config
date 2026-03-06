@@ -20,6 +20,7 @@
       ../../modules/desktop/hyprland.nix
       # System services
       ../../modules/system/github-runner.nix
+      ../../modules/services/claude-code-router.nix
     ];
 
   # Bootloader.
