@@ -5,6 +5,7 @@
     neovim
     git
     jujutsu
+    jj-starship
     delta
     lazygit
     gh

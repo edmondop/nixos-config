@@ -18,7 +18,6 @@
         ./hosts/nixos/configuration.nix
         {
           nixpkgs.overlays = [ jj-starship.overlays.default ];
-          environment.systemPackages = [ pkgs.jj-starship ];
         }
       ];
     };
