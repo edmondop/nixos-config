@@ -32,6 +32,7 @@
     zinit
     foliate
     direnv
+    navi
     caffeine-ng
     act
     parted
