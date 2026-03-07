@@ -15,13 +15,14 @@
     git-lfs
     lazydocker
     docker-compose
-    taskwarrior2
+    taskwarrior3
     jq
     yq-go
     imagemagick
     opencode
     protobuf
     sqlite
+    sqlitebrowser
     tmux
     lf
     chezmoi
