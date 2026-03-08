@@ -25,5 +25,6 @@
     tmux
     lf
     chezmoi
+    gh-dash
   ];
 }

@@ -36,5 +36,8 @@
     caffeine-ng
     act
     parted
+    glow
+    sshs
+    diffnav
   ];
 }
