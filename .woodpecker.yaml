@@ -1,0 +1,10 @@
+when:
+  event: [push, pull_request]
+
+steps:
+  flake-check:
+    image: nixos/nix:latest
+    environment:
+      NIX_CONFIG: "experimental-features = nix-command flakes"
+    commands:
+      - nix flake check --no-build
