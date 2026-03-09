@@ -28,5 +28,9 @@
     lf
     chezmoi
     gh-dash
+    kubectl
+    kubernetes-helm
+    k9s
+    cloudflared
   ];
 }
