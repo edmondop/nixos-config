@@ -197,6 +197,8 @@
 
   programs.nix-ld.enable = true;
 
+  environment.sessionVariables.SQLITE_CLIB_PATH = "${pkgs.sqlite.out}/lib/libsqlite3.so";
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
