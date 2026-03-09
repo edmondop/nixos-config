@@ -40,5 +40,8 @@
     glow
     sshs
     diffnav
+    argocd
+    kubectl
+    helm
   ];
 }
