@@ -21,6 +21,9 @@
       # System services
       ../../modules/system/github-runner.nix
       ../../modules/services/claude-code-router.nix
+      ../../modules/services/k3s.nix
+      ../../modules/services/cloudflared.nix
+      ../../modules/services/registry.nix
     ];
 
   # Bootloader.
