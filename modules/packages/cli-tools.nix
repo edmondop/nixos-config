@@ -28,6 +28,7 @@
     neofetch
     curl
     wget
+    openssl
     oh-my-zsh
     zinit
     foliate

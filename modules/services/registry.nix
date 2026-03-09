@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  systemd.tmpfiles.rules = [
+    "d /var/lib/registry 0755 root root -"
+  ];
+
   virtualisation.oci-containers = {
     backend = "podman";
     containers.registry = {
