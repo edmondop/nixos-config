@@ -32,5 +32,6 @@
     kubernetes-helm
     k9s
     cloudflared
+    woodpecker-cli
   ];
 }
