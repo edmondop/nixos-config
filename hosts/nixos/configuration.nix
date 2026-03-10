@@ -24,6 +24,7 @@
       ../../modules/services/k3s.nix
       ../../modules/services/cloudflared.nix
       ../../modules/services/registry.nix
+      ../../modules/services/nix-cache.nix
     ];
 
   # Bootloader.
