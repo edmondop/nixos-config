@@ -10,6 +10,7 @@
     delta
     lazygit
     gh
+    glab
     turbo
     gemini-cli
     git-filter-repo
@@ -32,5 +33,6 @@
     kubernetes-helm
     k9s
     cloudflared
+
   ];
 }
