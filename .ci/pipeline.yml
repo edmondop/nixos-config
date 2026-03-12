@@ -1,0 +1,32 @@
+resources:
+  - name: nixos-config
+    type: git
+    source:
+      uri: https://github.com/edmondop/nixos-config.git
+      branch: main
+      username: x-access-token
+      password: ((github-token))
+
+jobs:
+  - name: flake-check
+    plan:
+      - get: nixos-config
+        trigger: true
+      - task: nix-flake-check
+        config:
+          platform: linux
+          image_resource:
+            type: registry-image
+            source:
+              repository: nixos/nix
+              tag: latest
+          inputs:
+            - name: nixos-config
+          run:
+            path: sh
+            args:
+              - -c
+              - |
+                echo "experimental-features = nix-command flakes" >> /etc/nix/nix.conf
+                cd nixos-config
+                nix flake check --no-build
