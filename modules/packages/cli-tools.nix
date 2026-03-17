@@ -28,6 +28,7 @@
     neofetch
     curl
     wget
+    openssl
     oh-my-zsh
     zinit
     foliate
@@ -39,5 +40,8 @@
     glow
     sshs
     diffnav
+    argocd
+    kubectl
+    helm
   ];
 }
